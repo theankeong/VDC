@@ -15,13 +15,14 @@ module "hub_network"{
 # }
 
 
-#  module "security"{
-#     source = "./modules/security"
-#     resourceprefix ="${var.resourceprefix}"
-#     loc = "${var.loc}"
-#     tags="${var.tags}"
-#     vnet_subnet_id = "${module.hub_network.subnet_numbers}"
-# }
+ module "security"{
+    source = "./modules/security"
+    resourceprefix ="${var.resourceprefix}"
+    loc = "${var.loc}"
+    tags="${var.tags}"
+    vnet_subnet_id = lookup(module.hub_network.vnet_subnets,"ext-dmz","aabbccddee")
+  #  "${module.hub_network.subnet_numbers}"
+}
 
 
 /*

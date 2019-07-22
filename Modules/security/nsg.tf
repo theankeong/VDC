@@ -85,11 +85,6 @@ resource "azurerm_network_security_rule" "AllowRDP" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg_web" {
-  subnet_id                 = "${var.vnet_subnet_id.spoke_web_id}"
-  network_security_group_id = "${azurerm_network_security_group.nsg.id}"
-}
-
-resource "azurerm_subnet_network_security_group_association" "nsg_app" {
-  subnet_id                 = "${var.vnet_subnet_id.spoke_app_id}"
+  subnet_id                 = "${var.vnet_subnet_id}"
   network_security_group_id = "${azurerm_network_security_group.nsg.id}"
 }
