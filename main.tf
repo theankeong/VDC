@@ -15,8 +15,8 @@ module "hub_network"{
 # }
 
 
- module "security"{
-    source = "./modules/security"
+ module "nsg"{
+    source = "./modules/nsg"
     resourceprefix ="${var.resourceprefix}"
     loc = "${var.loc}"
     tags="${var.tags}"
