@@ -12,13 +12,13 @@ module "hub_network"{
     resource_group = module.shared_svc_rg.rg
     }
 
-module "spoke_network"{
-    source = "./modules/network"
-    resource_group = "${var.spoke-resource_group}"
-    tags  = "${var.spoke-tags}"
-    vnet = "${var.spoke-vnet}"
-    subnet_numbers = "${var.spoke-subnet_numbers}"
-}
+# module "spoke_network"{
+#     source = "./modules/network"
+#     resource_group = "${var.spoke-resource_group}"
+#     tags  = "${var.spoke-tags}"
+#     vnet = "${var.spoke-vnet}"
+#     subnet_numbers = "${var.spoke-subnet_numbers}"
+# }
 
 
  module "nsg"{
