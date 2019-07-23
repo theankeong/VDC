@@ -32,7 +32,7 @@ module "hub_network"{
 
 
 module "vm"{
-    source = "./modules/compute"
+    source = "./modules/compute/windows"
     resource_group =  module.shared_svc_rg.rg
     vmprofile = var.vmprofile
     os_image = var.os_image
