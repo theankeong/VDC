@@ -12,20 +12,20 @@ module "hub_network"{
     resource_group = module.shared_svc_rg.rg
     }
 
-# module "spoke_network"{
-#     source = "./modules/network"
-#     resource_group = "${var.spoke-resource_group}"
-#     tags  = "${var.spoke-tags}"
-#     vnet = "${var.spoke-vnet}"
-#     subnet_numbers = "${var.spoke-subnet_numbers}"
-# }
+module "spoke_network"{
+    source = "./modules/network"
+    resource_group = "${var.spoke-resource_group}"
+    tags  = "${var.spoke-tags}"
+    vnet = "${var.spoke-vnet}"
+    subnet_numbers = "${var.spoke-subnet_numbers}"
+}
 
 
  module "nsg"{
     source = "./modules/network/nsg"
     nsg = var.hub-nsg
     tags  = var.hub-tags
-    vnet_subnet_id = lookup(module.hub_network.vnet_subnets,"ext-dmz","aabbccddee")
+    vnet_subnet_id = lookup(module.hub_network.vnet_subnets,"ext-dmz","")
     resource_group = module.shared_svc_rg.rg
 }
 
@@ -34,15 +34,15 @@ module "hub_network"{
     source = "./modules/network/vpngw"
     vpngw = var.vpngw
     ipsec_policy = var.ipsec_policy
-    vnet_subnet_id = lookup(module.hub_network.vnet_subnets,"GatewaySubnet","aabbccddee")
+    vnet_subnet_id = lookup(module.hub_network.vnet_subnets,"GatewaySubnet","")
     resource_group = module.shared_svc_rg.rg
 }
 
-# module "vm"{
-#     source = "./modules/compute/windows"
-#     resource_group =  module.shared_svc_rg.rg
-#     vmprofile = var.vmprofile
-#     os_image = var.os_image
-#     os_profile = var.os_profile
-#     vm_subnet_id = lookup(module.hub_network.vnet_subnets,"shared-svc","aabbccddee")
-# } 
+module "vm"{
+    source = "./modules/compute/windows"
+    resource_group =  module.shared_svc_rg.rg
+    vmprofile = var.vmprofile
+    os_image = var.os_image
+    os_profile = var.os_profile
+    vm_subnet_id = lookup(module.hub_network.vnet_subnets,"shared-svc","")
+} 
