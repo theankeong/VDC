@@ -9,7 +9,7 @@ resource "azurerm_public_ip" "vpngwpip" {
 resource "azurerm_local_network_gateway" "onpremise" {
   name                = var.vpngw.local_gw_name
   location            = var.resource_group.location
-  resource_group_name = var.resource_group.location
+  resource_group_name = var.resource_group.name
   gateway_address     = var.vpngw.local_gw_address
   address_space       = var.vpngw.local_gw_address_space
 }
