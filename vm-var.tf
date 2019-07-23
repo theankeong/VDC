@@ -1,16 +1,9 @@
-variable "vmresource_group" {
-  default     = {
-        name  = "aaa"
-        location = "aaa"
-    }
-}
-  
 
 variable "vmprofile" {
    default     = {
-        vm_name  = ""
-        vm_location = ""
-        vm_size = ""
+        vm_name  = "AD"
+        vm_location = "SouthEast Asia"
+        vm_size = "Standard_A2_v2"
     }
 }
 

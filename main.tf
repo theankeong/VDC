@@ -30,12 +30,12 @@ module "hub_network"{
 }
 
 
-/*
+
 module "vm"{
     source = "./modules/compute"
-    resource_group = "${var.vmresource_group}"
-    vmprofile = "${var.vmprofile}"
-    os_image = "${var.os_image}"
-    os_profile = "${var.os_profile}" 
-    vm_subnet_id = "${module.network.vnet_subnet_id.hub_shrd_svc_id}"
-} */
+    resource_group =  module.shared_svc_rg.rg
+    vmprofile = var.vmprofile
+    os_image = var.os_image
+    os_profile = var.os_profile
+    vm_subnet_id = lookup(module.hub_network.vnet_subnets,"shared-svc","aabbccddee")
+} 

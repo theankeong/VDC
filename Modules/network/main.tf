@@ -2,10 +2,6 @@ locals {
   subnet_list = keys(var.subnet_numbers)
 }
 
-# resource "azurerm_resource_group" "vnetrg" {
-#     name = "${var.resource_group.name}"
-#     location = "${var.resource_group.location}"
-# }
 
 resource "azurerm_virtual_network" "vnet" {  
     name = var.vnet.name
