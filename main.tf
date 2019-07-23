@@ -5,7 +5,7 @@ module "shared_svc_rg"{
 }
 
 module "hub_network"{
-    source = "./modules/network"
+    source = "./modules/network/vnet"
     tags  = var.hub-tags
     vnet = var.hub-vnet
     subnet_numbers = var.hub-subnet_numbers
@@ -22,7 +22,7 @@ module "hub_network"{
 
 
  module "nsg"{
-    source = "./modules/nsg"
+    source = "./modules/network/nsg"
     nsg = var.hub-nsg
     tags  = var.hub-tags
     vnet_subnet_id = lookup(module.hub_network.vnet_subnets,"ext-dmz","aabbccddee")
@@ -31,11 +31,11 @@ module "hub_network"{
 
 
 
-module "vm"{
-    source = "./modules/compute/windows"
-    resource_group =  module.shared_svc_rg.rg
-    vmprofile = var.vmprofile
-    os_image = var.os_image
-    os_profile = var.os_profile
-    vm_subnet_id = lookup(module.hub_network.vnet_subnets,"shared-svc","aabbccddee")
-} 
+# module "vm"{
+#     source = "./modules/compute/windows"
+#     resource_group =  module.shared_svc_rg.rg
+#     vmprofile = var.vmprofile
+#     os_image = var.os_image
+#     os_profile = var.os_profile
+#     vm_subnet_id = lookup(module.hub_network.vnet_subnets,"shared-svc","aabbccddee")
+# } 
