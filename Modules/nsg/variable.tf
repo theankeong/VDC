@@ -1,11 +1,16 @@
-variable "resourceprefix" {
-   
+
+variable "resource_group" {
+  default     = {
+        name  = "aaa"
+        location = "aaa"
+    }
+}
+
+variable "nsg" {
+   default={name = "hub"
+   } 
   }
 
-variable "loc" {
-    description = "Default Azure Region"
-   
-}
 
 variable "tags" {
    default     = {

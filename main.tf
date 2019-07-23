@@ -1,9 +1,15 @@
+module "shared_svc_rg"{
+    source = "./modules/resourcegroup"
+    resource_group = var.sharedsvc-resource_group
+    tags = var.hub-tags
+}
+
 module "hub_network"{
     source = "./modules/network"
-    resource_group = "${var.hub-resource_group}"
-    tags  = "${var.hub-tags}"
-    vnet = "${var.hub-vnet}"
-    subnet_numbers = "${var.hub-subnet_numbers}"
+    tags  = var.hub-tags
+    vnet = var.hub-vnet
+    subnet_numbers = var.hub-subnet_numbers
+    resource_group = module.shared_svc_rg.rg
     }
 
 # module "spoke_network"{
@@ -17,11 +23,10 @@ module "hub_network"{
 
  module "nsg"{
     source = "./modules/nsg"
-    resourceprefix ="${var.resourceprefix}"
-    loc = "${var.loc}"
-    tags="${var.tags}"
+    nsg = var.hub-nsg
+    tags  = var.hub-tags
     vnet_subnet_id = lookup(module.hub_network.vnet_subnets,"ext-dmz","aabbccddee")
-  #  "${module.hub_network.subnet_numbers}"
+    resource_group = module.shared_svc_rg.rg
 }
 
 

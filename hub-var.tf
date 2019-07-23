@@ -1,7 +1,8 @@
-variable "hub-resource_group" {
+
+variable "sharedsvc-resource_group" {
   default     = {
-        name  = "vnet-rg"
-        location = "vnet-rg"
+        name  = "sharedsvc-rg"
+        location = "SouthEast Asia"
     }
 }
 
@@ -28,3 +29,9 @@ variable "hub-subnet_numbers" {
 }
 
 
+variable "hub-nsg" {
+ default     = {
+        name  = "nsg-hub"
+       
+    }
+}
