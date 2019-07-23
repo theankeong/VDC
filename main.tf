@@ -30,6 +30,13 @@ module "hub_network"{
 }
 
 
+ module "vpngw"{
+    source = "./modules/network/vpngw"
+    vpngw = var.vpngw
+    ipsec_policy = var.ipsec_policy
+    vnet_subnet_id = lookup(module.hub_network.vnet_subnets,"GatewaySubnet","aabbccddee")
+    resource_group = module.shared_svc_rg.rg
+}
 
 # module "vm"{
 #     source = "./modules/compute/windows"
